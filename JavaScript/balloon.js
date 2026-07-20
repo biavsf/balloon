@@ -1,37 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-    }
-
-    #balloon {
-        width: 200px;
-        height: 200px;
-        background-color: red;
-        border-radius: 300px;
-        cursor: pointer;
-
-    }
-</style>
-
-<body>
-
-    <div id="balloon">
-    </div>
-</body>
-<script>
-
-    //divaumenta ligada à id balloon (div)
+//divaumenta ligada à id balloon (div)
     const divmuda = document.getElementById('balloon')
 
     //tamanho inicial
@@ -117,9 +84,3 @@
             }, 700);
         }
     });
-
-
-
-</script>
-
-</html>
