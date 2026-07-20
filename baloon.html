@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    #balloon {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        border-radius: 300px;
+        cursor: pointer;
+
+    }
+</style>
+
+<body>
+
+    <div id="balloon">
+    </div>
+</body>
+<script>
+
+    //divaumenta ligada à id balloon (div)
+    const divmuda = document.getElementById('balloon')
+
+    //tamanho inicial
+    let tamanho = 200;
+
+    //constante que recebe as cores (vermelho,verde,azul,vermelho)
+    const mudar = ['red', 'green', 'blue'];
+
+    //color vai receber o valor inicial (vermelho = 1)
+    let color = 1;
+
+    //inicia o timer para esvaziar o balão em null
+    let timer = null;
+
+    //função para retornar os valores originais do balão
+    function retorno() {
+        tamanho = 200;
+        color = 1;
+        divmuda.style.width = tamanho + 'px';
+        divmuda.style.height = tamanho + 'px';
+        divmuda.style.backgroundColor = 'red';
+
+
+        //resetar o timer que faz o balão esvaziar
+        clearInterval(timer);
+        timer = null;
+
+    }
+
+    //evento adicionado --- quando clicar a função é ativada --- 
+    divmuda.addEventListener('click', function () {
+
+        //função tem o papel de aumentar em 10px o valor de largura e cumprimento 
+        tamanho = tamanho + 10;
+        divmuda.style.width = tamanho + 'px';
+        divmuda.style.height = tamanho + 'px';
+
+        //mudar a cor do balão a partir do clique 
+        divmuda.style.backgroundColor = mudar[color];
+        color = color + 1;
+
+        //se a color for a ultima cor (azul) --mudar-- retornará a primeira cor (vermelho)
+        if (color >= mudar.length) {
+            color = 0;
+        }
+
+        //limitar o tamanho (420px) se ultrapassar explodir e retornar para o valor inicial
+        if (tamanho >= 420) {
+            alert('o balão explodiu! Mais cuidado na proxima');
+            retorno();
+            return;
+
+        }
+    })
+
+    //evento adicionado ---quando o cursor sair da div---
+    divmuda.addEventListener('mouseleave', function () {
+
+        // se o timer estiver em null, iniciará, o timer, a partir que o mouse sair da div 
+        if (timer === null) {
+            timer = setInterval(function () {
+
+                //se o balão for menor ou igual a 199px enviará um alerta
+                if (tamanho < 200) {
+                    alert('o balão esvaziou tente clicar no balão para enche-lo');
+                    retorno();
+                    return;
+                }
+
+                //diminue o tamanho da div em 5px
+                tamanho = tamanho - 5;
+                divmuda.style.width = tamanho + 'px';
+                divmuda.style.height = tamanho + 'px';
+
+                //inverte a cor do balão 
+                color = color - 1;
+                if (color < 0) {
+                    color = mudar.length - 1;
+                }
+
+                //mudar a cor (de fato)
+                divmuda.style.backgroundColor = mudar[color];
+            }, 700);
+        }
+    });
+
+
+
+</script>
+
+</html>
